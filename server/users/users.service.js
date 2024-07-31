@@ -9,7 +9,17 @@ async function fetchAllUsers() {
 }
 // Route to fetch user are https://jsonplaceholder.typicode.com/users/:userId
 async function fetchUserById(userId) {
-  return {};
+  const { data: user } = await axios.get(
+    `https://jsonplaceholder.typicode.com/users/${userId}`,
+  );
+  if (user) {
+    const [firstName, lastName] = user.name.split(' ');
+    return {
+      ...user,
+      shortName: `${firstName} ${lastName ? lastName + '.' : ''}`,
+    };
+  }
+  return null;
 }
 
 module.exports = { fetchAllUsers, fetchUserById };

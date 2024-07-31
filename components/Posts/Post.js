@@ -57,11 +57,42 @@ const Button = styled.button(() => ({
 
 const PrevButton = styled(Button)`
   left: 10px;
+  top: 40%;
 `;
 
 const NextButton = styled(Button)`
   right: 10px;
+  top: 40%;
 `;
+
+const ProfileSection = styled.div(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: '10px',
+  backgroundColor: '#f9f9f9',
+}));
+const ProfileName = styled.div(() => ({
+  fontWeight: 'bold',
+  fontSize: '17px',
+}));
+const ProfileEmail = styled.div(() => ({}));
+
+const ProfileImage = styled.div(() => ({
+  width: '40px',
+  height: '40px',
+  borderRadius: '50%',
+  marginRight: '10px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: 'white',
+  fontWeight: 'bold',
+  backgroundColor: 'gray',
+}));
+
+const ProfileInfo = styled.div(() => ({
+  fontSize: '14px',
+}));
 
 const Post = ({ post }) => {
   const carouselRef = useRef(null);
@@ -69,7 +100,7 @@ const Post = ({ post }) => {
   const handleNextClick = () => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
-        left: 50,
+        left: 300,
         behavior: 'smooth',
       });
     }
@@ -78,14 +109,30 @@ const Post = ({ post }) => {
   const handlePrevClick = () => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
-        left: -70,
+        left: -300,
         behavior: 'smooth',
       });
     }
   };
+  const getName = fullName => {
+    const names = fullName.split(' ');
+    if (names.length < 2) {
+      return '';
+    }
+    const firstName = names[0];
+    const lastName = names[names.length - 1];
+    return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+  };
 
   return (
     <PostContainer>
+      <ProfileSection>
+        <ProfileImage>{getName(post.userName)}</ProfileImage>
+        <ProfileInfo>
+          <ProfileName>{post.userName}</ProfileName>
+          <ProfileEmail>{post.userEmail}</ProfileEmail>
+        </ProfileInfo>
+      </ProfileSection>
       <CarouselContainer>
         <Carousel ref={carouselRef}>
           {post.images.map((image, index) => (

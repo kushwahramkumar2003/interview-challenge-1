@@ -5,10 +5,10 @@ const Navbar = styled('nav')(() => ({
   backgroundColor: '#333',
   color: '#fff',
   width: '100%',
-  position: 'absolute',
   top: 0,
   left: 0,
   zIndex: 1000,
+  position: 'fixed',
 }));
 
 const ListItem = styled('li')(() => ({

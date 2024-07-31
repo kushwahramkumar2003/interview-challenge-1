@@ -1,8 +1,11 @@
 import React from 'react';
+import { WindowWidthProvider } from '../components/context/windowWidthProvider';
 
 const App = ({ Component, pageProps }) => (
   <React.Fragment>
-    <Component {...pageProps} />
+    <WindowWidthProvider>
+      <Component {...pageProps} />
+    </WindowWidthProvider>
   </React.Fragment>
 );
 
